@@ -12,6 +12,7 @@ if (!connectionString) {
 
 const client = postgres(connectionString, {
   max: 10,
+  prepare: false,
   ssl: connectionString.includes("localhost") || connectionString.includes("127.0.0.1") ? false : "require",
 });
 
