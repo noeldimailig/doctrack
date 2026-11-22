@@ -4,18 +4,18 @@ import * as schema from "./schema";
 
 const connectionString = process.env.DATABASE_URL;
 
-console.log("DATABASE_URL:", connectionString);
-
 if (!connectionString) {
   throw new Error("DATABASE_URL is not configured. See docs/ENVIRONMENT.md.");
 }
 
+const isLocal = connectionString.includes("localhost") || connectionString.includes("127.0.0.1");
+
 const client = postgres(connectionString, {
-  max: 5,
+  max: 3,
   prepare: false,
   connect_timeout: 10,
   idle_timeout: 20,
-  ssl: connectionString.includes("localhost") || connectionString.includes("127.0.0.1") ? false : "require",
+  ssl: isLocal ? false : "require",
 });
 
 export const db = drizzle({ client, schema });
