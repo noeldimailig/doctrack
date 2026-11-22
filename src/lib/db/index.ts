@@ -11,8 +11,10 @@ if (!connectionString) {
 }
 
 const client = postgres(connectionString, {
-  max: 10,
+  max: 5,
   prepare: false,
+  connect_timeout: 10,
+  idle_timeout: 20,
   ssl: connectionString.includes("localhost") || connectionString.includes("127.0.0.1") ? false : "require",
 });
 
