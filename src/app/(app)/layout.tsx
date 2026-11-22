@@ -6,10 +6,13 @@ import { getUserPermissionKeys } from "@/lib/auth/permissions";
 export const instant = false;
 
 export default async function AppLayout({ children }: { children: React.ReactNode }) {
+  console.log("[AppLayout] start");
   const session = await requireSession();
+  console.log("[AppLayout] got session", session.user.id);
   
   const roleKeys = (session.user as typeof session.user & { roleKeys?: string[] }).roleKeys ?? [];
   const permissions = await getUserPermissionKeys(session.user.id);
+  console.log("[AppLayout] got permissions", permissions.length);
 
   return (
     <div className="flex min-h-screen">

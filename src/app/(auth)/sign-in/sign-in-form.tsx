@@ -31,8 +31,9 @@ export function SignInForm({ nextPath }: SignInFormProps) {
     }
 
     toast.success("Signed in successfully");
-    router.push(nextPath.startsWith("/") ? nextPath : "/dashboard");
-    router.refresh();
+    // router.push(nextPath.startsWith("/") ? nextPath : "/dashboard");
+    // router.refresh();
+    window.location.assign(nextPath.startsWith("/") ? nextPath : "/dashboard");
   }
 
   return (
