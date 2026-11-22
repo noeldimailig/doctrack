@@ -7,6 +7,7 @@ export const instant = false;
 
 export default async function AppLayout({ children }: { children: React.ReactNode }) {
   const session = await requireSession();
+  
   const roleKeys = (session.user as typeof session.user & { roleKeys?: string[] }).roleKeys ?? [];
   const permissions = await getUserPermissionKeys(session.user.id);
 

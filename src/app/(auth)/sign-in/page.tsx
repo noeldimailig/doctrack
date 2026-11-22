@@ -11,7 +11,9 @@ interface SignInPageProps {
 }
 
 export default async function SignInPage({ searchParams }: SignInPageProps) {
-  const session = await getSession();
+  console.log("[HomePage] calling getSession");
+const session = await getSession();
+console.log("[HomePage] session:", Boolean(session?.user));
   if (session?.user) redirect("/dashboard");
 
   const { next } = await searchParams;
